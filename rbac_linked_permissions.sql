@@ -1,34 +1,4 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.5.9-log - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL Version:             8.3.0.4694
--- --------------------------------------------------------
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-
--- Dumping database structure for auth
-CREATE DATABASE IF NOT EXISTS `auth` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `auth`;
-
-
--- Dumping structure for table auth.rbac_linked_permissions
-CREATE TABLE IF NOT EXISTS `rbac_linked_permissions` (
-  `id` int(10) unsigned NOT NULL DEFAULT '50' COMMENT 'Permission id',
-  `linkedId` int(10) unsigned NOT NULL COMMENT 'Linked Permission id',
-  PRIMARY KEY (`id`,`linkedId`),
-  KEY `fk__rbac_linked_permissions__rbac_permissions1` (`id`),
-  KEY `fk__rbac_linked_permissions__rbac_permissions2` (`linkedId`),
-  CONSTRAINT `fk__rbac_linked_permissions__rbac_permissions1` FOREIGN KEY (`id`) REFERENCES `rbac_permissions` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk__rbac_linked_permissions__rbac_permissions2` FOREIGN KEY (`linkedId`) REFERENCES `rbac_permissions` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Permission - Linked Permission relation';
-
--- Dumping data for table auth.rbac_linked_permissions: ~1,977 rows (approximately)
 DELETE FROM `rbac_linked_permissions`;
-/*!40000 ALTER TABLE `rbac_linked_permissions` DISABLE KEYS */;
 INSERT INTO `rbac_linked_permissions` (`id`, `linkedId`) VALUES
 	(1, 1),
 	(1, 2),
@@ -2007,7 +1977,3 @@ INSERT INTO `rbac_linked_permissions` (`id`, `linkedId`) VALUES
 	(199, 725),
 	(199, 736),
 	(550, 195);
-/*!40000 ALTER TABLE `rbac_linked_permissions` ENABLE KEYS */;
-/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
-/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
